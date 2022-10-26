@@ -1,24 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Modelo;
+using Persistencia;
 
 namespace ProjetoApoo.Controllers
 {
     public class ProcedimentosController : Controller
     {
+        private ExameDAL exameDAL = new ExameDAL();
         // GET: Procedimentos
         public ActionResult Index()
         {
-            return View();
+            return View(exameDAL.ObterExamesClassificadosPorId());
         }
 
         // GET: Procedimentos/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(long? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(
+                HttpStatusCode.BadRequest);
+            }
+            Exame exame = exameDAL.ObterExamesPorId((long)id);
+            if (exame == null)
+            {
+                return HttpNotFound();
+            }
+            return View(exame);
         }
 
         // GET: Procedimentos/Create
@@ -29,56 +42,83 @@ namespace ProjetoApoo.Controllers
 
         // POST: Procedimentos/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Exame exame)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    exameDAL.GravarExame(exame);
+                    return RedirectToAction("Index");
+                }
+                return View(exame);
             }
             catch
             {
-                return View();
+                return View(exame);
             }
         }
 
         // GET: Procedimentos/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(long? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(
+                HttpStatusCode.BadRequest);
+            }
+            Exame exame = exameDAL.ObterExamesPorId((long)id);
+            if (exame == null)
+            {
+                return HttpNotFound();
+            }
+            return View(exame);
         }
 
         // POST: Procedimentos/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Exame exame)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    exameDAL.GravarExame(exame);
+                    return RedirectToAction("Index");
+                }
+                return View(exame);
             }
             catch
             {
-                return View();
+                return View(exame);
             }
         }
 
         // GET: Procedimentos/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(long? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(
+                HttpStatusCode.BadRequest);
+            }
+            Exame exame = exameDAL.ObterExamesPorId((long)id);
+            if (exame == null)
+            {
+                return HttpNotFound();
+            }
+            return View(exame);
         }
 
         // POST: Procedimentos/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(long id)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                Exame exame = exameDAL.EliminarExamePorId(id);
                 return RedirectToAction("Index");
             }
             catch

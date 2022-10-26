@@ -10,7 +10,7 @@ namespace Persistencia
 {
     public class EFContext : DbContext
     {
-        public EFContext() : base("Asp_Net_MVC_CS")
+        public EFContext() : base("Asp_Net_MVC_CSApoo")
         {
             Database.SetInitializer<EFContext>(
             new DropCreateDatabaseIfModelChanges<EFContext>());

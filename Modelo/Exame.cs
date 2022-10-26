@@ -9,6 +9,6 @@ namespace Modelo
     public class Exame
     {
         public long ExameId { get; set; }
-        public string descricao { get; set; }
+        public string Descricao { get; set; }
     }
 }
