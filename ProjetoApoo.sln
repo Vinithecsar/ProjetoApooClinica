@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoApoo", "ProjetoApoo\ProjetoApoo.csproj", "{46CC1C92-11EE-4418-BCB6-08079702D688}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo", "Modelo\Modelo.csproj", "{937B9B14-4859-4731-9724-E777BEA6F424}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistencia", "Persistencia\Persistencia.csproj", "{BE5F030E-E559-40E7-A803-5F6A09BEBE51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46CC1C92-11EE-4418-BCB6-08079702D688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46CC1C92-11EE-4418-BCB6-08079702D688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46CC1C92-11EE-4418-BCB6-08079702D688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46CC1C92-11EE-4418-BCB6-08079702D688}.Release|Any CPU.Build.0 = Release|Any CPU
+		{937B9B14-4859-4731-9724-E777BEA6F424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937B9B14-4859-4731-9724-E777BEA6F424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937B9B14-4859-4731-9724-E777BEA6F424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{937B9B14-4859-4731-9724-E777BEA6F424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE5F030E-E559-40E7-A803-5F6A09BEBE51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE5F030E-E559-40E7-A803-5F6A09BEBE51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE5F030E-E559-40E7-A803-5F6A09BEBE51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE5F030E-E559-40E7-A803-5F6A09BEBE51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12092015-4FD4-416D-8400-2938E74155BC}
+	EndGlobalSection
+EndGlobal
