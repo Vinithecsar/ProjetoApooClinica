@@ -5,7 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Modelo;
-using Persistencia;
+using Persistencia.DAL;
 
 namespace ProjetoApoo.Controllers
 {
@@ -13,13 +13,13 @@ namespace ProjetoApoo.Controllers
     {
         private ExameDAL exameDAL = new ExameDAL();
         // GET: Procedimentos
-        public ActionResult Index()
+        public ActionResult IndexExame()
         {
             return View(exameDAL.ObterExamesClassificadosPorId());
         }
 
         // GET: Procedimentos/Details/5
-        public ActionResult Details(long? id)
+        public ActionResult DetailsExame(long? id)
         {
             if (id == null)
             {
@@ -35,21 +35,21 @@ namespace ProjetoApoo.Controllers
         }
 
         // GET: Procedimentos/Create
-        public ActionResult Create()
+        public ActionResult CreateExame()
         {
             return View();
         }
 
         // POST: Procedimentos/Create
         [HttpPost]
-        public ActionResult Create(Exame exame)
+        public ActionResult CreateExame(Exame exame)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     exameDAL.GravarExame(exame);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexExame");
                 }
                 return View(exame);
             }
@@ -60,7 +60,7 @@ namespace ProjetoApoo.Controllers
         }
 
         // GET: Procedimentos/Edit/5
-        public ActionResult Edit(long? id)
+        public ActionResult EditExame(long? id)
         {
             if (id == null)
             {
@@ -78,14 +78,14 @@ namespace ProjetoApoo.Controllers
         // POST: Procedimentos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Exame exame)
+        public ActionResult EditExame(Exame exame)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     exameDAL.GravarExame(exame);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexExame");
                 }
                 return View(exame);
             }
@@ -96,7 +96,7 @@ namespace ProjetoApoo.Controllers
         }
 
         // GET: Procedimentos/Delete/5
-        public ActionResult Delete(long? id)
+        public ActionResult DeleteExame(long? id)
         {
             if (id == null)
             {
@@ -114,12 +114,130 @@ namespace ProjetoApoo.Controllers
         // POST: Procedimentos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(long id)
+        public ActionResult DeleteExame(long id)
         {
             try
             {
                 Exame exame = exameDAL.EliminarExamePorId(id);
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexExame");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //CONSULTA
+
+        private ConsultaDAL consultaDAL = new ConsultaDAL();
+        // GET: Procedimentos
+        public ActionResult IndexConsulta()
+        {
+            return View(consultaDAL.ObterConsultasClassificadosPorId());
+        }
+
+        // GET: Procedimentos/Details/5
+        public ActionResult DetailsConsulta(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(
+                HttpStatusCode.BadRequest);
+            }
+            Consulta consulta = consultaDAL.ObterConsultasPorId((long)id);
+            if (consulta == null)
+            {
+                return HttpNotFound();
+            }
+            return View(consulta);
+        }
+
+        // GET: Procedimentos/Create
+        public ActionResult CreateConsulta()
+        {
+            return View();
+        }
+
+        // POST: Procedimentos/Create
+        [HttpPost]
+        public ActionResult CreateConsulta(Consulta consulta)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    consultaDAL.GravarConsulta(consulta);
+                    return RedirectToAction("IndexConsulta");
+                }
+                return View(consulta);
+            }
+            catch
+            {
+                return View(consulta);
+            }
+        }
+
+        // GET: Procedimentos/Edit/5
+        public ActionResult EditConsulta(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(
+                HttpStatusCode.BadRequest);
+            }
+            Consulta consulta = consultaDAL.ObterConsultasPorId((long)id);
+            if (consulta == null)
+            {
+                return HttpNotFound();
+            }
+            return View(consulta);
+        }
+
+        // POST: Procedimentos/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditConsulta(Consulta consulta)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    consultaDAL.GravarConsulta(consulta);
+                    return RedirectToAction("IndexConsulta");
+                }
+                return View(consulta);
+            }
+            catch
+            {
+                return View(consulta);
+            }
+        }
+
+        // GET: Procedimentos/Delete/5
+        public ActionResult DeleteConsulta(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(
+                HttpStatusCode.BadRequest);
+            }
+            Consulta consulta = consultaDAL.ObterConsultasPorId((long)id);
+            if (consulta == null)
+            {
+                return HttpNotFound();
+            }
+            return View(consulta);
+        }
+
+        // POST: Procedimentos/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConsulta(long id)
+        {
+            try
+            {
+                Consulta consulta = consultaDAL.EliminarConsultaPorId(id);
+                return RedirectToAction("IndexConsulta");
             }
             catch
             {
