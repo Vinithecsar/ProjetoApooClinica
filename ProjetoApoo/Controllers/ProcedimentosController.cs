@@ -6,12 +6,15 @@ using System.Web;
 using System.Web.Mvc;
 using Modelo;
 using Persistencia.DAL;
+using Persistencia.Contexts;
 
 namespace ProjetoApoo.Controllers
 {
     public class ProcedimentosController : Controller
     {
         private ExameDAL exameDAL = new ExameDAL();
+        private ConsultaDAL consultaDAL = new ConsultaDAL();
+
         // GET: Procedimentos
         public ActionResult IndexExame()
         {
@@ -37,6 +40,7 @@ namespace ProjetoApoo.Controllers
         // GET: Procedimentos/Create
         public ActionResult CreateExame()
         {
+            ViewBag.ConsultaId = new SelectList(consultaDAL.ObterConsultasClassificadosPorId(), "ConsultaId");
             return View();
         }
 
@@ -72,6 +76,7 @@ namespace ProjetoApoo.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ConsultaId = new SelectList(consultaDAL.ObterConsultasClassificadosPorId(), "ConsultaId"/*, exame.ConsultaId*/);
             return View(exame);
         }
 
@@ -129,7 +134,6 @@ namespace ProjetoApoo.Controllers
 
         //CONSULTA
 
-        private ConsultaDAL consultaDAL = new ConsultaDAL();
         // GET: Procedimentos
         public ActionResult IndexConsulta()
         {

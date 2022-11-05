@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Modelo.Consulta>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexConsulta</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "CreateConsulta")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ConsultaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data_hora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sintomas)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsultaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_hora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sintomas)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditConsulta", new { id=item.ConsultaId }) |
+                @Html.ActionLink("Details", "DetailsConsulta", new { id=item.ConsultaId }) |
+                @Html.ActionLink("Delete", "DeleteConsulta", new { id=item.ConsultaId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

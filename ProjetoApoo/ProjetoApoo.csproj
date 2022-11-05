@@ -109,6 +109,15 @@
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Views\Procedimentos\IndexExame.cshtml" />
+    <Content Include="Views\Procedimentos\DetailsExame.cshtml" />
+    <Content Include="Views\Procedimentos\CreateExame.cshtml" />
+    <Content Include="Views\Procedimentos\EditExame.cshtml" />
+    <Content Include="Views\Procedimentos\DeleteExame.cshtml" />
+    <Content Include="Views\Procedimentos\IndexConsulta.cshtml" />
+    <Content Include="Views\Procedimentos\DetailsConsulta.cshtml" />
+    <Content Include="Views\Procedimentos\CreateConsulta.cshtml" />
+    <Content Include="Views\Procedimentos\EditConsulta.cshtml" />
+    <Content Include="Views\Procedimentos\DeleteConsulta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
