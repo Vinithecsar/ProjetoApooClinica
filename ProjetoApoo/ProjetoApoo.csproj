@@ -108,11 +108,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
-    <Content Include="Views\Procedimentos\Index.cshtml" />
-    <Content Include="Views\Procedimentos\Create.cshtml" />
-    <Content Include="Views\Procedimentos\Details.cshtml" />
-    <Content Include="Views\Procedimentos\Edit.cshtml" />
-    <Content Include="Views\Procedimentos\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -122,7 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\Procedimentos\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Modelo\Modelo.csproj">

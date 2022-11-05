@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Modelo;
 
-namespace Persistencia
+namespace Persistencia.Contexts
 {
     public class EFContext : DbContext
     {
@@ -16,5 +16,6 @@ namespace Persistencia
             new DropCreateDatabaseIfModelChanges<EFContext>());
         }
         public DbSet<Exame> Exames { get; set; }
+        public DbSet<Consulta> Consultas { get; set; }
     }
 }

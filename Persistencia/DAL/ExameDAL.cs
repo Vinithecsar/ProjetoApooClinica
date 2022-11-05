@@ -4,8 +4,9 @@ using System.Text;
 using System.Linq;
 using System.Data.Entity;
 using Modelo;
+using Persistencia.Contexts;
 
-namespace Persistencia
+namespace Persistencia.DAL
 {
     public class ExameDAL
     {
