@@ -17,5 +17,6 @@ namespace Persistencia.Contexts
         }
         public DbSet<Exame> Exames { get; set; }
         public DbSet<Consulta> Consultas { get; set; }
+        public DbSet<ConsultaExame> ConsultasExames { get; set; }
     }
 }

@@ -26,8 +26,7 @@ namespace ProjetoApoo.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(
-                HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Exame exame = exameDAL.ObterExamesPorId((long)id);
             if (exame == null)
@@ -40,7 +39,6 @@ namespace ProjetoApoo.Controllers
         // GET: Procedimentos/Create
         public ActionResult CreateExame()
         {
-            ViewBag.ConsultaId = new SelectList(consultaDAL.ObterConsultasClassificadosPorId(), "ConsultaId");
             return View();
         }
 
@@ -76,7 +74,7 @@ namespace ProjetoApoo.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ConsultaId = new SelectList(consultaDAL.ObterConsultasClassificadosPorId(), "ConsultaId"/*, exame.ConsultaId*/);
+            //ViewBag.ConsultaId = new SelectList(consultaDAL.ObterConsultasClassificadosPorId(), "ConsultaId"/*, exame.ConsultaId*/);
             return View(exame);
         }
 
