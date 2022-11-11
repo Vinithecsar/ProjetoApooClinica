@@ -13,11 +13,11 @@ namespace Persistencia.DAL
         private EFContext context = new EFContext();
         public IQueryable<Exame> ObterExamesClassificadosPorId()
         {
-            return context.Exames.Include(c => c.Consulta).OrderBy(b => b.ExameId);
+            return context.Exames.OrderBy(b => b.ExameId);
         }
         public Exame ObterExamesPorId(long id)
         {
-            return context.Exames.Where(f => f.ExameId == id).Include(c => c.Consulta).First();
+            return context.Exames.Where(f => f.ExameId == id).First();
         }
         public void GravarExame(Exame exame)
         {

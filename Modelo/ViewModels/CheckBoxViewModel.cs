@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Modelo
+namespace Modelo.ViewModels
 {
-    public class Exame
+    public class CheckBoxViewModel
     {
-        public long ExameId { get; set; }
+        public int Id { get; set; }
         public string Descricao { get; set; }
-        public virtual ICollection<Consulta> Consultas { get; set; }
+        public bool Checked { get; set; }
     }
 }
