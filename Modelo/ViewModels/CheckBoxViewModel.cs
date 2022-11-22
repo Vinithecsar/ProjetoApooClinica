@@ -8,7 +8,7 @@ namespace Modelo.ViewModels
 {
     public class CheckBoxViewModel
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Descricao { get; set; }
         public bool Checked { get; set; }
     }
