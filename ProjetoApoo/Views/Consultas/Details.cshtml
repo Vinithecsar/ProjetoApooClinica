@@ -1,4 +1,4 @@
-﻿@model Modelo.ConsultaViewModel
+﻿@model Modelo.ViewModels.ConsultaViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -36,7 +36,7 @@
         <dd>
             @if (Model.Exames != null)
             {
-                foreach (var item in Model.Exams)
+                foreach (var item in Model.Exames)
                 {
                     if (item.Checked)
                     {

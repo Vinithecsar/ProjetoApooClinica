@@ -36,7 +36,31 @@ namespace ProjetoApoo.Controllers
             {
                 return HttpNotFound();
             }
-            return View(consulta);
+            var ConsultasExames = from c in context.Exames
+                                  select new
+                                  {
+                                      c.ExameId,
+                                      c.Descricao,
+                                      Checked = ((from ce in context.ConsultasExames
+                                                  where (ce.ConsultaId == id) & (ce.ExameId == c.ExameId)
+                                                  select ce).Count() > 0)
+                                  };
+            var consultaViewModel = new ConsultaViewModel();
+            consultaViewModel.ConsultaId = id.Value;
+            consultaViewModel.Data_hora = consulta.Data_hora;
+            consultaViewModel.Sintomas = consulta.Sintomas;
+            var checkboxListExames = new List<CheckBoxViewModel>();
+            foreach (var item in ConsultasExames)
+            {
+                checkboxListExames.Add(new CheckBoxViewModel
+                {
+                    Id = item.ExameId,
+                    Descricao = item.Descricao,
+                    Checked = item.Checked
+                });
+            }
+            consultaViewModel.Exames = checkboxListExames;
+            return View(consultaViewModel);
         }
 
         // GET: Consultas/Create
@@ -141,7 +165,21 @@ namespace ProjetoApoo.Controllers
             }
             return View(consulta);
         }
-
+        // GET: Consultas/Delete/5
+        public ActionResult Delete(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(
+                HttpStatusCode.BadRequest);
+            }
+            Consulta consulta = consultaDAL.ObterConsultasPorId((long)id);
+            if (consulta == null)
+            {
+                return HttpNotFound();
+            }
+            return View(consulta);
+        }
         // POST: Consultas/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
