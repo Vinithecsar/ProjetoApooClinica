@@ -11,6 +11,6 @@ namespace Modelo.ViewModels
         public long ConsultaId { get; set; }
         public DateTime Data_hora { get; set; }
         public string Sintomas { get; set; }
-        public List<CheckBoxViewModel> Exames {get; set; }
+        public List<CheckBoxViewModel> Exames { get; set; }
     }
 }
