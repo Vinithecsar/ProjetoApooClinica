@@ -9,13 +9,14 @@ using System.Web.Mvc;
 using Modelo;
 using Persistencia.Contexts;
 using Persistencia.DAL;
+using Modelo.ViewModels;
 
 namespace ProjetoApoo.Controllers
 {
     public class ConsultasController : Controller
     {
         private ConsultaDAL consultaDAL = new ConsultaDAL();
-
+        private EFContext context = new EFContext();
         // GET: Consultas
         public ActionResult Index()
         {
@@ -35,7 +36,31 @@ namespace ProjetoApoo.Controllers
             {
                 return HttpNotFound();
             }
-            return View(consulta);
+            var ConsultasExames = from c in context.Exames
+                                  select new
+                                  {
+                                      c.ExameId,
+                                      c.Descricao,
+                                      Checked = ((from ce in context.ConsultasExames
+                                                  where (ce.ConsultaId == id) & (ce.ExameId == c.ExameId)
+                                                  select ce).Count() > 0)
+                                  };
+            var consultaViewModel = new ConsultaViewModel();
+            consultaViewModel.ConsultaId = id.Value;
+            consultaViewModel.Data_hora = consulta.Data_hora;
+            consultaViewModel.Sintomas = consulta.Sintomas;
+            var checkboxListExames = new List<CheckBoxViewModel>();
+            foreach (var item in ConsultasExames)
+            {
+                checkboxListExames.Add(new CheckBoxViewModel
+                {
+                    Id = item.ExameId,
+                    Descricao = item.Descricao,
+                    Checked = item.Checked
+                });
+            }
+            consultaViewModel.Exames = checkboxListExames;
+            return View(consultaViewModel);
         }
 
         // GET: Consultas/Create
@@ -79,55 +104,67 @@ namespace ProjetoApoo.Controllers
             {
                 return HttpNotFound();
             }
-            return View(consulta);
-            //var ConsultasExames = from c in consulta.Cursos
-            //                       select new
-            //                       {
-            //                           c.CursoId,
-            //                           c.Nome,
-            //                           Checked = ((from ce in db.CursosEstudantes
-            //                                       where (ce.EstudanteId == id) & (ce.CursoId == c.CursoId)
-            //                                       select ce).Count() > 0)
-            //                       };
-            //var estudanteViewModel = new EstudantesViewModel();
-            //estudanteViewModel.EstudanteId = id.Value;
-            //estudanteViewModel.Nome = estudante.Nome;
-            //estudanteViewModel.Idade = estudante.Idade;
-            //estudanteViewModel.Sexo = estudante.Sexo;
-            //var checkboxListCursos = new List<CheckBoxViewModel>();
-            //foreach (var item in CursosEstudantes)
-            //{
-            //    checkboxListCursos.Add(new CheckBoxViewModel
-            //    {
-            //        Id = item.CursoId,
-            //        Nome = item.Nome,
-            //        Checked = item.Checked
-            //    });
-            //}
-            //estudanteViewModel.Cursos = checkboxListCursos;
-            //return View(estudanteViewModel);
+            var ConsultasExames = from c in context.Exames
+                                  select new
+                                  {
+                                      c.ExameId,
+                                      c.Descricao,
+                                      Checked = ((from ce in context.ConsultasExames
+                                                  where (ce.ConsultaId == id) & (ce.ExameId == c.ExameId)
+                                                  select ce).Count() > 0)
+                                  };
+            var consultaViewModel = new ConsultaViewModel();
+            consultaViewModel.ConsultaId = id.Value;
+            consultaViewModel.Data_hora = consulta.Data_hora;
+            consultaViewModel.Sintomas = consulta.Sintomas;
+            var checkboxListExames = new List<CheckBoxViewModel>();
+            foreach (var item in ConsultasExames)
+            {
+                checkboxListExames.Add(new CheckBoxViewModel
+                {
+                    Id = item.ExameId,
+                    Descricao = item.Descricao,
+                    Checked = item.Checked
+                });
+            }
+            consultaViewModel.Exames = checkboxListExames;
+            return View(consultaViewModel);
         }
 
         // POST: Consultas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ConsultaId,Data_hora,Sintomas")] Consulta consulta)
+        public ActionResult Edit(ConsultaViewModel consulta)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                var consultaSelecionada = context.Consultas.Find(consulta.ConsultaId);
+                consultaSelecionada.ConsultaId = consulta.ConsultaId;
+                consultaSelecionada.Data_hora = consulta.Data_hora;
+                consultaSelecionada.Sintomas = consulta.Sintomas;
+                foreach (var item in context.ConsultasExames)
                 {
-                    consultaDAL.GravarConsulta(consulta);
-                    return RedirectToAction("Index");
+                    if (item.ConsultaId == consulta.ConsultaId)
+                    {
+                        context.Entry(item).State = EntityState.Deleted;
+                    }
                 }
-                return View(consulta);
+                foreach (var item in consulta.Exames)
+                {
+                    if (item.Checked)
+                    {
+                        context.ConsultasExames.Add(new ConsultaExame()
+                        {
+                            ConsultaId = consulta.ConsultaId,
+                            ExameId = item.Id
+                        });
+                    }
+                }
+                context.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View(consulta);
-            }
+            return View(consulta);
         }
-
         // GET: Consultas/Delete/5
         public ActionResult Delete(long? id)
         {
@@ -143,7 +180,6 @@ namespace ProjetoApoo.Controllers
             }
             return View(consulta);
         }
-
         // POST: Consultas/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

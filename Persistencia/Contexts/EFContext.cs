@@ -14,6 +14,7 @@ namespace Persistencia.Contexts
         {
             Database.SetInitializer<EFContext>(
             new DropCreateDatabaseIfModelChanges<EFContext>());
+            this.Configuration.ProxyCreationEnabled = false;
         }
         public DbSet<Exame> Exames { get; set; }
         public DbSet<Consulta> Consultas { get; set; }

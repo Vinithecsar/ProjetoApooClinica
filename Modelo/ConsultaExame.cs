@@ -8,9 +8,9 @@ namespace Modelo
 {
     public class ConsultaExame
     {
-        public int ConsultaExameId { get; set; }
-        public int ConsultaId { get; set; }
-        public int ExameId { get; set; }
+        public long ConsultaExameId { get; set; }
+        public long ConsultaId { get; set; }
+        public long ExameId { get; set; }
         public virtual Consulta Consulta { get; set; }
         public virtual Exame Exame { get; set; }
     }

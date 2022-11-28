@@ -1,4 +1,4 @@
-﻿@model Modelo.Consulta
+﻿@model Modelo.ViewModels.ConsultaViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -30,6 +30,27 @@
 
         <dd>
             @Html.DisplayFor(model => model.Sintomas)
+        </dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Exames)</dt>
+        <dd>
+            @if (Model.Exames != null)
+            {
+                foreach (var item in Model.Exames)
+                {
+                    if (item.Checked)
+                    {
+                        <div>
+                            <span class="glyphicon glyphicon-list-alt"></span><Text>&nbsp;</Text>
+                            @item.Descricao
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                <span class="glyphicon glyphicon-list-alt"></span><text>Sem Exames Registrados</Text>
+            }
         </dd>
 
     </dl>
