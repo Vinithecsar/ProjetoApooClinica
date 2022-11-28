@@ -18,5 +18,7 @@ namespace Persistencia.Contexts
         public DbSet<Exame> Exames { get; set; }
         public DbSet<Consulta> Consultas { get; set; }
         public DbSet<ConsultaExame> ConsultasExames { get; set; }
+        public System.Data.Entity.DbSet<Secretario> Secretarios { get; set; }
+        public System.Data.Entity.DbSet<Cliente> Clientes { get; set; }
     }
 }
