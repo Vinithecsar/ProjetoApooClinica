@@ -1,54 +1,51 @@
-﻿using System;
+﻿using Persistencia.DAL;
+using Modelo;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Modelo;
-using Persistencia.Contexts;
-using Persistencia.DAL;
+using System.Net;
 
 namespace ProjetoApoo.Controllers
 {
-    public class ClientesController : Controller
+    public class TelefonesController : Controller
     {
-        private ClienteDAL clienteDAL = new ClienteDAL();
-        private ActionResult ObterVisaoClientePorId(long? id)
+        private TelefoneDAL telefoneDAL = new TelefoneDAL();
+        private ActionResult ObterVisaoTelefonePorId(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = clienteDAL.ObterClientePorId((long)id);
-            if (cliente == null)
+            Telefone Telefone = telefoneDAL.ObterTelefonePorId((long)id);
+            if (Telefone == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View(Telefone);
         }
-        public ActionResult GravarCliente(Cliente cliente)
+        private ActionResult GravarTelefone(Telefone telefone)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    clienteDAL.GravarCliente(cliente);
+                    telefoneDAL.GravarTelefone(telefone);
                     return RedirectToAction("index");
                 }
-                return View(cliente);
+                return View(telefone);
             }
             catch
             {
-                return View(cliente);
+                return View(telefone);
             }
         }
-        // GET: Clientes
+        // GET: Telefones
         public ActionResult Index()
         {
-            return View(clienteDAL.ObterClientesClassificadosPorCPF());
-            //return View(context.Clientes.OrderBy(c => c.Nome));
+            return View(telefoneDAL.ObterTelefonesClassificadosPorDdd());
+            //return View(context.Telefones.OrderBy(c => c.Nome));
             //return View(cat);
         }
         // Create get
@@ -59,39 +56,38 @@ namespace ProjetoApoo.Controllers
         // Create post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Cliente cliente)
+        public ActionResult Create(Telefone telefone)
         {
-            // IEnumerable<Cliente> a = cat.Where(c => c.ClienteId >0);
-            //context.Clientes.Add(ca);
+            // IEnumerable<Telefone> a = cat.Where(c => c.TelefoneId >0);
+            //context.Telefones.Add(ca);
             //context.SaveChanges();
-            //ca.ClienteId = cat.Select(c => c.ClienteId).Max() + 1;// type ;  1, 2, 3, 4
+            //ca.TelefoneId = cat.Select(c => c.TelefoneId).Max() + 1;// type ;  1, 2, 3, 4
             //cat.Add(ca);
             //return RedirectToAction("Index");
-            GravarCliente(cliente);
-            return RedirectToAction("../Telefones/Create"); 
+            return GravarTelefone(telefone);
         }
         //Edit alone
         public ActionResult Edit(long? id)
         {
-            return ObterVisaoClientePorId(id);
+            return ObterVisaoTelefonePorId(id);
         }
         //Edit post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Cliente cliente)
+        public ActionResult Edit(Telefone telefone)
         {
-            return GravarCliente(cliente);
-            
+            return GravarTelefone(telefone);
+
         }
         //Details alone
         public ActionResult Details(long? id)
         {
-            return ObterVisaoClientePorId(id);
+            return ObterVisaoTelefonePorId(id);
         }
         //Delete alone
         public ActionResult Delete(long? id)
         {
-            return ObterVisaoClientePorId(id);
+            return ObterVisaoTelefonePorId(id);
         }
         //Delete post
         [HttpPost]
@@ -100,8 +96,8 @@ namespace ProjetoApoo.Controllers
         {
             try
             {
-                Cliente cliente = clienteDAL.EliminarClientePorId(id);
-                TempData["Message"] = "Cliente " + cliente.Cpf.ToUpper() + " foi removido";
+                Telefone telefone = telefoneDAL.EliminarTelefonePorId(id);
+                TempData["Message"] = "Telefone " + telefone.TelefoneId + " foi removido";
                 return RedirectToAction("index");
             }
             catch
