@@ -1,18 +1,18 @@
-﻿@model IEnumerable<Modelo.Secretario>
+﻿@model IEnumerable<Modelo.Veterinario>
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DtAdmissao)
+            @Html.DisplayNameFor(model => model.crmv)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Nome)
@@ -29,7 +29,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DtAdmissao)
+            @Html.DisplayFor(modelItem => item.crmv)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Nome)

@@ -9,42 +9,42 @@ using System.Web.Mvc;
 
 namespace ProjetoApoo.Controllers
 {
-    public class SecretariosController : Controller
+    public class VeterinariosController : Controller
     {
-        private SecretarioDAL secretarioDAL = new SecretarioDAL();
-        private ActionResult ObterVisaoSecretarioPorId(long? id)
+        private VeterinarioDAL veterinarioDAL = new VeterinarioDAL();
+        private ActionResult ObterVisaoVeterinarioPorId(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Secretario secretario = secretarioDAL.ObterSecretarioPorId((long)id);
-            if (secretario == null)
+            Veterinario veterinario = veterinarioDAL.ObterVeterinarioPorId((long)id);
+            if (veterinario == null)
             {
                 return HttpNotFound();
             }
-            return View(secretario);
+            return View(veterinario);
         }
-        private ActionResult GravarSecretario(Secretario secretario)
+        private ActionResult GravarVeterinario(Veterinario veterinario)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    secretarioDAL.GravarSecretario(secretario);
+                    veterinarioDAL.GravarVeterinario(veterinario);
                     return RedirectToAction("index");
                 }
-                return View(secretario);
+                return View(veterinario);
             }
             catch
             {
-                return View(secretario);
+                return View(veterinario);
             }
         }
-        // GET: Secretarios
+        // GET: Veterinarios
         public ActionResult Index()
         {
-            return View(secretarioDAL.ObterSecretariosClassificadosPorNome());
+            return View(veterinarioDAL.ObterVeterinariosClassificadosPorNome());
         }
         // Create get
         public ActionResult Create()
@@ -54,32 +54,32 @@ namespace ProjetoApoo.Controllers
         // Create post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Secretario secretario)
+        public ActionResult Create(Veterinario veterinario)
         {
-            return GravarSecretario(secretario);
+            return GravarVeterinario(veterinario);
         }
         //Edit alone
         public ActionResult Edit(long? id)
         {
-            return ObterVisaoSecretarioPorId(id);
+            return ObterVisaoVeterinarioPorId(id);
         }
         //Edit post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Secretario secretario)
+        public ActionResult Edit(Veterinario veterinario)
         {
-            return GravarSecretario(secretario);
+            return GravarVeterinario(veterinario);
 
         }
         //Details alone
         public ActionResult Details(long? id)
         {
-            return ObterVisaoSecretarioPorId(id);
+            return ObterVisaoVeterinarioPorId(id);
         }
         //Delete alone
         public ActionResult Delete(long? id)
         {
-            return ObterVisaoSecretarioPorId(id);
+            return ObterVisaoVeterinarioPorId(id);
         }
         //Delete post
         [HttpPost]
@@ -88,7 +88,8 @@ namespace ProjetoApoo.Controllers
         {
             try
             {
-                Secretario secretario = secretarioDAL.EliminarSecretarioPorId(id);
+                Veterinario veterinario = veterinarioDAL.EliminarVeterinarioPorId(id);
+ 
                 return RedirectToAction("index");
             }
             catch

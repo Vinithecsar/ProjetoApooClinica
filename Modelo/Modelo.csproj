@@ -50,6 +50,7 @@
     <Compile Include="Secretario.cs" />
     <Compile Include="Telefone.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="Veterinario.cs" />
     <Compile Include="ViewModels\CheckBoxViewModel.cs" />
     <Compile Include="ViewModels\ConsultaViewModel.cs" />
   </ItemGroup>
