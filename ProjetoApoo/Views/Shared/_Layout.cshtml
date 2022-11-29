@@ -12,6 +12,8 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
+                @Html.ActionLink("Clientes", "Index", "Clientes", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Secretários", "Index", "Secretarios", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("Consultas", "Index", "Consultas", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("Exames", "Index", "Exames", new { area = "" }, new { @class = "navbar-brand" })
             </div>

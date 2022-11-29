@@ -149,17 +149,18 @@ namespace ProjetoApoo.Controllers
                         context.Entry(item).State = EntityState.Deleted;
                     }
                 }
-                foreach (var item in consulta.Exames)
-                {
-                    if (item.Checked)
+                if (consulta.Exames != null) {
+                    foreach (var item in consulta.Exames)
                     {
-                        context.ConsultasExames.Add(new ConsultaExame()
+                        if (item.Checked)
                         {
-                            ConsultaId = consulta.ConsultaId,
-                            ExameId = item.Id
-                        });
-                    }
-                }
+                            context.ConsultasExames.Add(new ConsultaExame()
+                            {
+                                ConsultaId = consulta.ConsultaId,
+                                ExameId = item.Id
+                            });
+                        }
+                    } }
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
