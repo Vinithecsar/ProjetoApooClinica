@@ -120,8 +120,8 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\ConsultasController.cs" />
     <Compile Include="Controllers\ExamesController.cs" />
-    <Compile Include="Controllers\ProcedimentosController.cs" />
     <Compile Include="Controllers\SecretariosController.cs" />
+    <Compile Include="Controllers\VeterinariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -161,7 +161,12 @@
     <Content Include="Views\Secretarios\Create.cshtml" />
     <Content Include="Views\Secretarios\Edit.cshtml" />
     <Content Include="Views\Secretarios\Details.cshtml" />
+    <Content Include="Views\Veterinarios\Create.cshtml" />
+    <Content Include="Views\Veterinarios\Index.cshtml" />
+    <Content Include="Views\Veterinarios\Edit.cshtml" />
+    <Content Include="Views\Veterinarios\Details.cshtml" />
     <Content Include="Views\Secretarios\Delete.cshtml" />
+    <Content Include="Views\Veterinarios\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
