@@ -49,14 +49,15 @@ namespace ProjetoApoo.Controllers
             //return View(cat);
         }
         // Create get
-        public ActionResult Create(long id)
+        public ActionResult Create(long? IdCliente)
         {
-            return View(id);
+            ViewData["id"] = IdCliente;
+            return View();
         }
         // Create post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Telefone telefone)
+        public ActionResult Create(Telefone telefone, long? IdCliente)
         {
             // IEnumerable<Telefone> a = cat.Where(c => c.TelefoneId >0);
             //context.Telefones.Add(ca);
@@ -64,6 +65,8 @@ namespace ProjetoApoo.Controllers
             //ca.TelefoneId = cat.Select(c => c.TelefoneId).Max() + 1;// type ;  1, 2, 3, 4
             //cat.Add(ca);
             //return RedirectToAction("Index");
+            telefone.IdCliente = (long)IdCliente;
+            Console.WriteLine(telefone);
             return GravarTelefone(telefone);
         }
         //Edit alone
