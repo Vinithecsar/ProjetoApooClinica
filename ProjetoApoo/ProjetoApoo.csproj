@@ -120,6 +120,7 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\ConsultasController.cs" />
     <Compile Include="Controllers\ExamesController.cs" />
+    <Compile Include="Controllers\PetsController.cs" />
     <Compile Include="Controllers\SecretariosController.cs" />
     <Compile Include="Controllers\TelefonesController.cs" />
     <Compile Include="Controllers\VeterinariosController.cs" />
@@ -159,6 +160,11 @@
     <Content Include="Views\Secretarios\Delete.cshtml" />
     <Content Include="Views\Veterinarios\Delete.cshtml" />
     <Content Include="Views\Telefones\Create.cshtml" />
+    <Content Include="Views\Pets\Index.cshtml" />
+    <Content Include="Views\Pets\Details.cshtml" />
+    <Content Include="Views\Pets\Create.cshtml" />
+    <Content Include="Views\Pets\Edit.cshtml" />
+    <Content Include="Views\Pets\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
