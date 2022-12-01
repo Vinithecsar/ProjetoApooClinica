@@ -131,16 +131,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
-    <Content Include="Views\Procedimentos\IndexExame.cshtml" />
-    <Content Include="Views\Procedimentos\DetailsExame.cshtml" />
-    <Content Include="Views\Procedimentos\CreateExame.cshtml" />
-    <Content Include="Views\Procedimentos\EditExame.cshtml" />
-    <Content Include="Views\Procedimentos\DeleteExame.cshtml" />
-    <Content Include="Views\Procedimentos\IndexConsulta.cshtml" />
-    <Content Include="Views\Procedimentos\DetailsConsulta.cshtml" />
-    <Content Include="Views\Procedimentos\CreateConsulta.cshtml" />
-    <Content Include="Views\Procedimentos\EditConsulta.cshtml" />
-    <Content Include="Views\Procedimentos\DeleteConsulta.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Consultas\Create.cshtml" />
@@ -167,6 +157,8 @@
     <Content Include="Views\Veterinarios\Edit.cshtml" />
     <Content Include="Views\Veterinarios\Details.cshtml" />
     <Content Include="Views\Secretarios\Delete.cshtml" />
+    <Content Include="Views\Veterinarios\Delete.cshtml" />
+    <Content Include="Views\Telefones\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
