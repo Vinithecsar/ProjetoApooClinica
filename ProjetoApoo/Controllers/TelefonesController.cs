@@ -49,9 +49,9 @@ namespace ProjetoApoo.Controllers
             //return View(cat);
         }
         // Create get
-        public ActionResult Create()
+        public ActionResult Create(long id)
         {
-            return View();
+            return View(id);
         }
         // Create post
         [HttpPost]

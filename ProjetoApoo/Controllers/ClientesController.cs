@@ -68,7 +68,7 @@ namespace ProjetoApoo.Controllers
             //cat.Add(ca);
             //return RedirectToAction("Index");
             GravarCliente(cliente);
-            return RedirectToAction("../Telefones/Create"); 
+            return RedirectToAction("../Telefones/Create", cliente.UsuarioId); 
         }
         //Edit alone
         public ActionResult Edit(long? id)
