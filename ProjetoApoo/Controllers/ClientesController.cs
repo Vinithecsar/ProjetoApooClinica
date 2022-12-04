@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using Modelo;
-using Persistencia.Contexts;
 using Persistencia.DAL;
 
 namespace ProjetoApoo.Controllers
@@ -68,7 +61,7 @@ namespace ProjetoApoo.Controllers
             //cat.Add(ca);
             //return RedirectToAction("Index");
             GravarCliente(cliente);
-            return RedirectToAction("../Telefones/Create"); 
+            return RedirectToAction("../Telefones/Create", new { idCliente = cliente.UsuarioId } ); 
         }
         //Edit alone
         public ActionResult Edit(long? id)

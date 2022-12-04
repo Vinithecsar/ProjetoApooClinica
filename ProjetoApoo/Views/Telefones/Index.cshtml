@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Modelo.Telefone>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Adicionar Outro", "Create", new { idCliente = ViewBag.ID })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ddd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Numero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdCliente)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.IdCliente.ToString() == ViewBag.ID)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ddd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCliente)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TelefoneId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TelefoneId })
+                </td>
+            </tr>
+        }
+        else
+        {
+            continue;
+        }
+
+    }
+
+</table>

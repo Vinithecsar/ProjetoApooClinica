@@ -11,5 +11,6 @@ namespace Modelo
         public long TelefoneId { get; set; }
         public string Ddd { get; set; }
         public string Numero { get; set; }
+        public long IdCliente { get; set; }
     }
 }

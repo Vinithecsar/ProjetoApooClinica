@@ -32,7 +32,6 @@ namespace ProjetoApoo.Controllers
                 if (ModelState.IsValid)
                 {
                     telefoneDAL.GravarTelefone(telefone);
-                    return RedirectToAction("index");
                 }
                 return View(telefone);
             }
@@ -42,8 +41,9 @@ namespace ProjetoApoo.Controllers
             }
         }
         // GET: Telefones
-        public ActionResult Index()
+        public ActionResult Index(long? IdCliente)
         {
+            ViewBag.ID = Request.QueryString["idCliente"];
             return View(telefoneDAL.ObterTelefonesClassificadosPorDdd());
             //return View(context.Telefones.OrderBy(c => c.Nome));
             //return View(cat);
@@ -51,6 +51,7 @@ namespace ProjetoApoo.Controllers
         // Create get
         public ActionResult Create()
         {
+            ViewBag.ID = Request.QueryString["idCliente"];
             return View();
         }
         // Create post
