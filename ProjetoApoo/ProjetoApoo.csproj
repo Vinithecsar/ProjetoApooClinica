@@ -165,6 +165,8 @@
     <Content Include="Views\Pets\Edit.cshtml" />
     <Content Include="Views\Pets\Delete.cshtml" />
     <Content Include="Views\Telefones\Index.cshtml" />
+    <Content Include="Views\Telefones\Edit.cshtml" />
+    <Content Include="Views\Telefones\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
