@@ -20,26 +20,34 @@
         <th>
             @Html.DisplayNameFor(model => model.Sintomas)
         </th>
+        <th>Pet</th>
+        <th>Veterinario</th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ConsultaId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data_hora)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sintomas)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ConsultaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ConsultaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ConsultaId })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ConsultaId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Data_hora)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Sintomas)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Pet.Nome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Veterinario.Nome)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ConsultaId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ConsultaId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ConsultaId })
+    </td>
+</tr>
 }
 
 </table>

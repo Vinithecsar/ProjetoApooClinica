@@ -9,5 +9,6 @@ namespace Modelo
     public class Veterinario : Usuario
     {
         public string crmv { get; set; }
+        public virtual ICollection<Consulta> Consultas { get; set; }
     }
 }

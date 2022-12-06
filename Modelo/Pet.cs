@@ -20,5 +20,6 @@ namespace Modelo
         public TipoSexo Sexo { get; set; }
         public long EspecieId { get; set; }
         public Especie Especie { get; set; }
+        public virtual ICollection<Consulta> Consultas { get; set; }
     }
 }

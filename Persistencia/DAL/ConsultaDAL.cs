@@ -11,13 +11,13 @@ namespace Persistencia.DAL
     public class ConsultaDAL
     {
         private EFContext context = new EFContext();
-        public IQueryable<Consulta> ObterConsultasClassificadosPorId()
+        public IQueryable<Consulta> ObterConsultasClassificadasPorId()
         {
-            return context.Consultas.OrderBy(b => b.ConsultaId);
+            return context.Consultas.Include(c => c.Pet).Include(a => a.Veterinario).OrderBy(b => b.ConsultaId);
         }
         public Consulta ObterConsultasPorId(long id)
         {
-            return context.Consultas.Where(f => f.ConsultaId == id).First();
+            return context.Consultas.Where(f => f.ConsultaId == id).Include(c => c.Pet).Include(a => a.Veterinario).First();
         }
         public void GravarConsulta(Consulta consulta)
         {

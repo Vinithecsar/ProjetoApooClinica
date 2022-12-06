@@ -50,13 +50,11 @@ namespace ProjetoApoo.Controllers
         {
             if (pet == null)
             {
-                ViewBag.EspecieId = new SelectList(especieDAL.ObterEspeciesClassificadasPorNome(),
-                "EspecieId", "Nome");
+                ViewBag.EspecieId = new SelectList(especieDAL.ObterEspeciesClassificadasPorNome(), "EspecieId", "Nome");
             }
             else
             {
-                ViewBag.EspecieId = new SelectList(especieDAL.ObterEspeciesClassificadasPorNome(),
-                "EspecieId", "Nome", pet.EspecieId);
+                ViewBag.EspecieId = new SelectList(especieDAL.ObterEspeciesClassificadasPorNome(), "EspecieId", "Nome", pet.EspecieId);
             }
         }
         //metodos privados (fim)

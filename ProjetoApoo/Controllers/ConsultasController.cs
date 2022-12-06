@@ -15,12 +15,27 @@ namespace ProjetoApoo.Controllers
 {
     public class ConsultasController : Controller
     {
+        private void PopularViewBag(Consulta consulta  = null)
+        {
+            if (consulta == null)
+            {
+                ViewBag.PetId = new SelectList(petDAL.ObterPetsClassificadosPorId(),"PetId", "Nome");
+                ViewBag.UsuarioId = new SelectList(veterinarioDAL.ObterVeterinariosClassificadosPorNome(), "UsuarioId", "Nome");
+            }
+            else
+            {
+                ViewBag.PetId = new SelectList(petDAL.ObterPetsClassificadosPorId(), "PetId", "Nome", consulta.PetId);
+                ViewBag.UsuarioId = new SelectList(veterinarioDAL.ObterVeterinariosClassificadosPorNome(), "UsuarioId", "Nome", consulta.UsuarioId);
+            }
+        }
         private ConsultaDAL consultaDAL = new ConsultaDAL();
+        private PetDAL petDAL = new PetDAL();
+        private VeterinarioDAL veterinarioDAL = new VeterinarioDAL();
         private EFContext context = new EFContext();
         // GET: Consultas
         public ActionResult Index()
         {
-            return View(consultaDAL.ObterConsultasClassificadosPorId());
+            return View(consultaDAL.ObterConsultasClassificadasPorId());
         }
 
         // GET: Consultas/Details/5
@@ -28,8 +43,7 @@ namespace ProjetoApoo.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(
-                HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Consulta consulta = consultaDAL.ObterConsultasPorId((long)id);
             if (consulta == null)
@@ -49,6 +63,8 @@ namespace ProjetoApoo.Controllers
             consultaViewModel.ConsultaId = id.Value;
             consultaViewModel.Data_hora = consulta.Data_hora;
             consultaViewModel.Sintomas = consulta.Sintomas;
+            consultaViewModel.Pet = consulta.Pet;
+            consultaViewModel.Veterinario = consulta.Veterinario;
             var checkboxListExames = new List<CheckBoxViewModel>();
             foreach (var item in ConsultasExames)
             {
@@ -66,15 +82,14 @@ namespace ProjetoApoo.Controllers
         // GET: Consultas/Create
         public ActionResult Create()
         {
+            PopularViewBag();
             return View();
         }
 
         // POST: Consultas/Create
-        // Para se proteger de mais ataques, habilite as propriedades específicas às quais você quer se associar. Para 
-        // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ConsultaId,Data_hora,Sintomas")] Consulta consulta)
+        public ActionResult Create(Consulta consulta)
         {
             try
             {
@@ -83,6 +98,7 @@ namespace ProjetoApoo.Controllers
                     consultaDAL.GravarConsulta(consulta);
                     return RedirectToAction("Index");
                 }
+                PopularViewBag();
                 return View(consulta);
             }
             catch
@@ -94,10 +110,10 @@ namespace ProjetoApoo.Controllers
         // GET: Consultas/Edit/5
         public ActionResult Edit(long? id)
         {
+            PopularViewBag(consultaDAL.ObterConsultasPorId((long)id));
             if (id == null)
             {
-                return new HttpStatusCodeResult(
-                HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Consulta consulta = consultaDAL.ObterConsultasPorId((long)id);
             if (consulta == null)
@@ -164,6 +180,8 @@ namespace ProjetoApoo.Controllers
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.PetId = new SelectList(petDAL.ObterPetsClassificadosPorId(), "PetId", "Nome", consulta.PetId);
+            ViewBag.UsuarioId = new SelectList(veterinarioDAL.ObterVeterinariosClassificadosPorNome(), "UsuarioId", "Nome", consulta.UsuarioId);
             return View(consulta);
         }
         // GET: Consultas/Delete/5
@@ -171,8 +189,7 @@ namespace ProjetoApoo.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(
-                HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Consulta consulta = consultaDAL.ObterConsultasPorId((long)id);
             if (consulta == null)
