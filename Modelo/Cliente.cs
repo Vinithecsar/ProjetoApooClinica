@@ -9,5 +9,6 @@ namespace Modelo
     public class Cliente : Usuario
     {
         public string Cpf { get; set; }
+        public virtual ICollection<Endereco> Enderecos { get; set; }
     }
 }

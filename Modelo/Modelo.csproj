@@ -45,6 +45,7 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="Consulta.cs" />
     <Compile Include="ConsultaExame.cs" />
+    <Compile Include="Endereco.cs" />
     <Compile Include="Especie.cs" />
     <Compile Include="Exame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
