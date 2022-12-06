@@ -24,5 +24,6 @@ namespace Persistencia.Contexts
         public System.Data.Entity.DbSet<Cliente> Clientes { get; set; }
         public System.Data.Entity.DbSet<Veterinario> Veterinarios { get; set; }
         public DbSet<Pet> Pets { get; set; }
+        public DbSet<Especie> Especies { get; set; }
     }
 }

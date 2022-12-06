@@ -98,7 +98,6 @@ namespace ProjetoApoo.Controllers
             try
             {
                 Telefone telefone = telefoneDAL.EliminarTelefonePorId(id);
-                TempData["Message"] = "Telefone " + telefone.TelefoneId + " foi removido";
                 return RedirectToAction("index");
             }
             catch

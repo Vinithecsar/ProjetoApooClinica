@@ -13,11 +13,11 @@ namespace Persistencia.DAL
         private EFContext context = new EFContext();
         public IQueryable<Pet> ObterPetsClassificadosPorId()
         {
-            return context.Pets.OrderBy(b => b.PetId);
+            return context.Pets.Include(c => c.Especie).OrderBy(b => b.PetId);
         }
         public Pet ObterPetsPorId(long id)
         {
-            return context.Pets.Where(f => f.PetId == id).First();
+            return context.Pets.Where(f => f.PetId == id).Include(c => c.Especie).First();
         }
         public void GravarPet(Pet pet)
         {

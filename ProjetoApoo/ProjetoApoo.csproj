@@ -118,6 +118,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\ConsultasController.cs" />
+    <Compile Include="Controllers\EspeciesController.cs" />
     <Compile Include="Controllers\ExamesController.cs" />
     <Compile Include="Controllers\PetsController.cs" />
     <Compile Include="Controllers\SecretariosController.cs" />
@@ -167,6 +168,11 @@
     <Content Include="Views\Telefones\Index.cshtml" />
     <Content Include="Views\Telefones\Edit.cshtml" />
     <Content Include="Views\Telefones\Delete.cshtml" />
+    <Content Include="Views\Especie\Index.cshtml" />
+    <Content Include="Views\Especie\Create.cshtml" />
+    <Content Include="Views\Especie\Edit.cshtml" />
+    <Content Include="Views\Especie\Details.cshtml" />
+    <Content Include="Views\Especie\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -176,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Especies\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Modelo\Modelo.csproj">

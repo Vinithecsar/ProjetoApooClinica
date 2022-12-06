@@ -14,16 +14,25 @@ namespace ProjetoApoo.Controllers
 {
     public class PetsController : Controller
     {
-        private PetDAL petDAL = new PetDAL();
-
-        // GET: Pets
-        public ActionResult Index()
+        //metodos privados (inicio)
+        private ActionResult GravarPet(Pet pet)
         {
-            return View(petDAL.ObterPetsClassificadosPorId());
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    petDAL.GravarPet(pet);
+                    return RedirectToAction("Index");
+                }
+                PopularViewBag(pet);
+                return View(pet);
+            }
+            catch
+            {
+                return View(pet);
+            }
         }
-
-        // GET: Pets/Details/5
-        public ActionResult Details(long? id)
+        private ActionResult ObterVisaoPetPorId(long? id)
         {
             if (id == null)
             {
@@ -37,88 +46,76 @@ namespace ProjetoApoo.Controllers
             return View(pet);
         }
 
+        private void PopularViewBag(Pet pet = null)
+        {
+            if (pet == null)
+            {
+                ViewBag.EspecieId = new SelectList(especieDAL.ObterEspeciesClassificadasPorNome(),
+                "EspecieId", "Nome");
+            }
+            else
+            {
+                ViewBag.EspecieId = new SelectList(especieDAL.ObterEspeciesClassificadasPorNome(),
+                "EspecieId", "Nome", pet.EspecieId);
+            }
+        }
+        //metodos privados (fim)
+
+
+        //private EFContext context = new EFContext();
+        private PetDAL petDAL = new PetDAL();
+        private EspecieDAL especieDAL = new EspecieDAL();
+
+        // GET: Pets
+        public ActionResult Index()
+        {
+            return View(petDAL.ObterPetsClassificadosPorId());
+        }
+
         // GET: Pets/Create
         public ActionResult Create()
         {
+            PopularViewBag();
             return View();
         }
 
         // POST: Pets/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(Pet pet)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    petDAL.GravarPet(pet);
-                    return RedirectToAction("Index");
-                }
-                return View(pet);
-            }
-            catch
-            {
-                return View(pet);
-            }
+            return GravarPet(pet);
         }
 
         // GET: Pets/Edit/5
         public ActionResult Edit(long? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(
-                HttpStatusCode.BadRequest);
-            }
-            Pet pet = petDAL.ObterPetsPorId((long)id);
-            if (pet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pet);
+            PopularViewBag(petDAL.ObterPetsPorId((long)id));
+            return ObterVisaoPetPorId(id);
         }
 
         // POST: Pets/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(Pet pet)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    petDAL.GravarPet(pet);
-                    return RedirectToAction("Index");
-                }
-                return View(pet);
-            }
-            catch
-            {
-                return View(pet);
-            }
+            return GravarPet(pet);
+        }
+
+        // GET: Pets/Details/5
+        public ActionResult Details(long? id)
+        {
+            return ObterVisaoPetPorId(id);
         }
 
         // GET: Pets/Delete/5
+
         public ActionResult Delete(long? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(
-                HttpStatusCode.BadRequest);
-            }
-            Pet pet = petDAL.ObterPetsPorId((long)id);
-            if (pet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pet);
+            return ObterVisaoPetPorId(id);
         }
 
         // POST: Pets/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(long id)
+        public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
